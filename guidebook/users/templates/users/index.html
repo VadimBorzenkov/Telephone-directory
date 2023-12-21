@@ -1,0 +1,51 @@
+{% extends 'users/base.html' %}
+
+{% block nav %}
+<nav>
+    <a class="nav-button" href="{% url 'search' %}">Поиск</a>
+    <a class="nav-button" href="{% url 'add_record' %}">Добавить</a>
+    <a class="nav-button" href="{% url 'surnames' %}">Таблица Фамилий</a>
+    <a class="nav-button" href="{% url 'firstnames' %}">Таблица Имен</a>
+    <a class="nav-button" href="{% url 'patronymics' %}">Таблица Отчеств</a>
+    <a class="nav-button" href="{% url 'streets' %}">Таблица Улиц</a>
+
+</nav>
+{% endblock %}
+{% block content %}
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Улица</th>
+            <th>Дом</th>
+            <th>Корпус</th>
+            <th>Квартира</th>
+            <th>Телефон</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for task in tasks %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ task.surname.name }}</td>
+            <td>{{ task.firstname.name }}</td>
+            <td>{{ task.patronymic.name }}</td>
+            <td>{{ task.street.name }}</td>
+            <td>{{ task.house }}</td>
+            <td>{{ task.corpus }}</td>
+            <td>{{ task.apartments }}</td>
+            <td>{{ task.phone }}</td>
+            <td class="button-cell">
+                <a href="{% url 'delete_record' pk=task.pk %}">Удалить</a>
+            </td>
+            <td class="button-cell">
+                <a href="{% url 'edit_record' pk=task.pk %}">Изменить</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

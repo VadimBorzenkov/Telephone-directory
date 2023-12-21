@@ -1,0 +1,32 @@
+{% extends 'users/base.html' %}
+
+{% block nav %}
+<nav>
+    <a class="nav-button" href="{% url 'index' %}">Телефонный справочник</a>
+    <a class="nav-button" href="{% url 'add_record_surname' %}">Добавить</a>
+</nav>
+{% endblock %}
+{% block content %}
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Фамилия</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for task in tasks %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ task.name }}</td>
+            <td class="button-cell">
+                <a href="{% url 'delete_record_surname' pk=task.pk %}">Удалить</a>
+            </td>
+            <td class="button-cell">
+                <a href="{% url 'edit_record_surname' pk=task.pk %}">Изменить</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

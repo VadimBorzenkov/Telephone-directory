@@ -1,0 +1,50 @@
+{% extends 'users/base.html' %}
+
+<body>
+    {% block nav%}
+    <ul class="nav-list">
+        <li><a class="nav-button" href="{% url 'index' %}">Справочник</a></li>
+    </ul>
+    {% endblock %}
+
+    {% block content%}
+    {% if results %}
+    <h2>Результаты поиска</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Улица</th>
+                <th>Дом</th>
+                <th>Корпус</th>
+                <th>Квартира</th>
+                <th>Телефон</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ result.surname.name }}</td>
+                <td>{{ result.firstname.name }}</td>
+                <td>{{ result.patronymic.name }}</td>
+                <td>{{ result.street.name }}</td>
+                <td>{{ result.house }}</td>
+                <td>{{ result.corpus }}</td>
+                <td>{{ result.apartments }}</td>
+                <td>{{ result.phone }}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+
+        {% else %}
+        <p>Ничего не найдено</p>
+        {% endif %}
+        {% endblock %}
+</body>
+
+</html>
